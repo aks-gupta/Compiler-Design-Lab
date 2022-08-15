@@ -21,7 +21,6 @@ int main()
 {
 yyparse();
 printf("Valid\n");
-//printf("result is %d\n",yylval);
 }
 int yyerror()
 {
