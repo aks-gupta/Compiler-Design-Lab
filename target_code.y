@@ -122,3 +122,17 @@ int main(){
 int yywrap(){
     return 1;
 }
+
+/* 
+EXAMPLE OUTPUT
+Enter the Expression: a=(b+c)*7
+
+
+         TARGET CODE
+
+LD      R1 b
+LD      R2 c
+ADD     R3 R1 R2
+MUL     R4 R3 7
+STR     a R4
+*/
