@@ -57,14 +57,14 @@ char AddToTable(char opd1,char opd2,char opr){
 
 void PrintOpr(int cnt){
     if(isdigit(code[cnt].opd1))
-        printf("R%c ", code[cnt].opd1); //Print Register
+        printf("R%c ", code[cnt].opd1); //Print Register Numbers
     else if(isalpha(code[cnt].opd1))
-        printf("%c ", code[cnt].opd1-17); //Print NUM - 17 added in grammar to check against isalpha()
+        printf("#%c ", code[cnt].opd1-17); //Print NUM - 17 added in grammar to check against isalpha()
     else printf("R%c ", temp);
     if(isdigit(code[cnt].opd2))
         printf("R%c ", code[cnt].opd2);
     else if(isalpha(code[cnt].opd2))
-        printf("%c ", code[cnt].opd2-17);
+        printf("#%c ", code[cnt].opd2-17);
     else printf("R%c ", temp);
         printf("\n");
 }
@@ -74,8 +74,6 @@ void TargetCode(){
     int cnt=0;
     printf("\n\n\t TARGET CODE\n\n");
     while(cnt<ind){
-        /* printf("LD\t%c\n", code[cnt].opd1);
-        printf("LD\t%c\n", code[cnt].opd2); */
 
         switch(code[cnt].opr)
         {
@@ -112,10 +110,8 @@ int main(){
     printf("\nEnter the Expression: ");
     yyparse();
     temp='0';
-    // printTable();
     TargetCode();
     printf("\n");
-    // TargetCode2();
     return 0;
 }
 
