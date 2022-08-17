@@ -33,8 +33,8 @@ E: E '+' E {$$ = AddToTable((char)$1,(char)$3,'+');}
 | E '*' E {$$ = AddToTable((char)$1,(char)$3,'*');}
 | E '/' E {$$ = AddToTable((char)$1,(char)$3,'/');}
 | '(' E ')' {$$ = (char)$2;}
-| NUMBER {$$ = (char)($1+17);} //To convert to alpha, and check against isalpha()
-| LETTER {$$ = AddToTable((char)$1,(char)$1,'$');} //To add LD instruction later
+| NUMBER {$$ = (char)($1+17);}
+| LETTER {$$ = AddToTable((char)$1,(char)$1,'$');} 
 ;
 %%
 
@@ -59,7 +59,7 @@ void PrintOpr(int cnt){
     if(isdigit(code[cnt].opd1))
         printf("R%c ", code[cnt].opd1); //Print Register
     else if(isalpha(code[cnt].opd1))
-        printf("%c ", code[cnt].opd1-17); //Print NUM
+        printf("%c ", code[cnt].opd1-17); //Print NUM - 17 added in grammar to check against isalpha()
     else printf("R%c ", temp);
     if(isdigit(code[cnt].opd2))
         printf("R%c ", code[cnt].opd2);
@@ -99,7 +99,7 @@ void TargetCode(){
                     printf("STR\t%c R%c\n", code[cnt].opd1, temp-1); //Store into variable
                     break;
             case '$':
-                    printf("LD\t"); //Load ID
+                    printf("LD\t"); //Load ID, $ added in grammar
                     printf("R%c %c\n", temp, code[cnt].opd1);
                     break;
         }
